@@ -1,0 +1,793 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.1' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[     34567,        785]
+NotebookOptionsPosition[     32609,        746]
+NotebookOutlinePosition[     33042,        764]
+CellTagsIndexPosition[     32999,        761]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["ALP models and typical scales used in this notebook", "Chapter",
+ CellChangeTimes->{{3.903198197105345*^9, 3.903198204657548*^9}, {
+  3.903370922062874*^9, 
+  3.903370930298075*^9}},ExpressionUUID->"dc497e5d-f6a7-8742-a3c0-\
+1f47933c0dc0"],
+
+Cell[BoxData[""], "Input",
+ CellChangeTimes->{{3.957574740032336*^9, 3.9575747411001997`*^9}},
+ CellLabel->"In[1]:=",ExpressionUUID->"16bdf545-0d5a-4989-b965-bfcadcbe2862"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", 
+   RowBox[{
+    SubscriptBox["c", "u"], ",", 
+    SubscriptBox["c", "d"], ",", 
+    SubscriptBox["c", "s"], ",", 
+    SubscriptBox["c", "c"], ",", 
+    SubscriptBox["c", "b"], ",", 
+    SubscriptBox["c", "t"], ",", " ", 
+    SubscriptBox["c", "G"], ",", " ", 
+    SubscriptBox["c", "e"], ",", 
+    SubscriptBox["c", "\[Mu]"], ",", 
+    SubscriptBox["c", "\[Tau]"], ",", " ", 
+    SubscriptBox["c", "W"], ",", " ", 
+    RowBox[{
+     SubscriptBox["c", "B"], " ", "assuming", " ", "the", " ", 
+     "definition"}]}], "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{
+   "Print", "[", 
+    "\"\<Definition of the couplings: L = \!\(\*FractionBox[SubscriptBox[\(\
+\[Alpha]\), \(s\)], \(4  \[Pi]\)]\)\!\(\*FractionBox[\(a\), \
+\(f\)]\)\!\(\*SubscriptBox[\(c\), \(gg\)]\) \
+\!\(\*SuperscriptBox[SubscriptBox[\(G\), \(\[Mu]\[Nu]\)], \
+\(a\)]\)\!\(\*SuperscriptBox[OverscriptBox[\(G\), \(~\)], \(a, \
+\[Mu]\[Nu]\)]\)+\!\(\*FractionBox[\(\*SuperscriptBox[\(\[Delta]\), \(\[Mu]\)] \
+a\), \(f\)]\)\!\(\*SubscriptBox[\(\[Sum]\), \(q\)]\)\!\(\*SubscriptBox[\(c\), \
+\(ql\)]\) \!\(\*SubscriptBox[OverscriptBox[\(q\), \(_\)], \
+\(L\)]\)\!\(\*SubscriptBox[\(\[Gamma]\), \
+\(\[Mu]\)]\)\!\(\*SubscriptBox[\(q\), \
+\(L\)]\)+\!\(\*FractionBox[\(\*SuperscriptBox[\(\[Delta]\), \(\[Mu]\)] a\), \
+\(f\)]\)\!\(\*SubscriptBox[\(\[Sum]\), \(q\)]\)\!\(\*SubscriptBox[\(c\), \(qr\
+\)]\) \!\(\*SubscriptBox[OverscriptBox[\(q\), \(_\)], \
+\(R\)]\)\!\(\*SubscriptBox[\(\[Gamma]\), \
+\(\[Mu]\)]\)\!\(\*SubscriptBox[\(q\), \(R\)]\)\>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+   "Print", "[", 
+    "\"\<List of the ALP couplings considered in this notebook:\>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"Names", " ", "of", " ", "the", " ", "couplings"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"ALPcouplingslist", "=", 
+    RowBox[{"{", 
+     RowBox[{
+     "\"\<cul\>\"", ",", "\"\<cur\>\"", ",", "\"\<cdl\>\"", ",", 
+      "\"\<cdr\>\"", ",", "\"\<csl\>\"", ",", "\"\<csr\>\"", ",", 
+      "\"\<cgg\>\""}], "}"}]}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"ALPcouplingsSymbols", "=", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Symbol", "[", "#", "]"}], "&"}], "/@", "ALPcouplingslist"}]}],
+     ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+    "Values", " ", "of", " ", "the", " ", "couplings", " ", "at", " ", "a", 
+     " ", "scale", " ", "\[CapitalLambda]"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"couplingPatternOverall", "[", "\"\<cd\>\"", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "1", ",", "0", ",", "0", ",", "0"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"couplingPatternOverall", "[", "\"\<cQ\>\"", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "1", ",", "0", ",", "1", ",", "0", ",", "1", ",", "0", ",", "1"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"couplingPatternOverall", "[", "\"\<Gluon\>\"", "]"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "1"}], 
+      "}"}]}], ";"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{"ALPs", " ", "coupled", " ", "to", " ", "gluons"}], ",", " ", 
+     RowBox[{"with", " ", "the", " ", "coefficient", " ", 
+      SubscriptBox["c", "G"], " ", "fixed", " ", "to", " ", "match", " ", 
+      "1811.03474", " ", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"Eq", ".", " ", "S1"}], " ", "expressed", " ", "in", " ", 
+        "terms", " ", "of", " ", 
+        SubscriptBox["f", "a"]}], ")"}]}]}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+      "couplingPatternOverall", "[", "\"\<Gluon 1811.03474\>\"", "]"}], "=", 
+      RowBox[{"{", 
+       RowBox[{"0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+        FractionBox["1", "2"], ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+        "0"}], "}"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"couplingPatternOverall", "[", "\"\<W\>\"", "]"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+        "0", ",", "0", ",", "0", ",", "1", ",", "0"}], "}"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"couplingPatternOverall", "[", "\"\<B\>\"", "]"}], "=", 
+      RowBox[{"{", 
+       RowBox[{
+       "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", "0", ",", 
+        "0", ",", "0", ",", "0", ",", "0", ",", "1"}], "}"}]}], ";"}], "*)"}],
+    "\[IndentingNewLine]", 
+   RowBox[{"(*", 
+    RowBox[{"List", " ", "of", " ", "descriptions"}], "*)"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ModelDescription", "[", "\"\<Gluon\>\"", "]"}], "=", 
+     "\"\<Coupling only to gluons, L = \!\(\*FractionBox[SubscriptBox[\(\
+\[Alpha]\), \(s\)], \(4  \[Pi]\)]\)\!\(\*FractionBox[\(a\), \
+\(f\)]\)\!\(\*SubscriptBox[\(c\), \(gg\)]\) \
+\!\(\*SuperscriptBox[SubscriptBox[\(G\), \(\[Mu]\[Nu]\)], \
+\(a\)]\)\!\(\*SuperscriptBox[OverscriptBox[\(G\), \(~\)], \(a, \
+\[Mu]\[Nu]\)]\) with \!\(\*SubscriptBox[\(c\), \(gg\)]\) = 1\>\""}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ModelDescription", "[", "\"\<cQ\>\"", "]"}], "=", 
+     "\"\<Coupling only to left-handed quarks, L = \
+\!\(\*FractionBox[\(\*SuperscriptBox[\(\[Delta]\), \(\[Mu]\)] a\), \(f\)]\)\!\
+\(\*SubscriptBox[\(\[Sum]\), \(q\)]\)\!\(\*SubscriptBox[\(c\), \(ql\)]\) \!\(\
+\*SubscriptBox[OverscriptBox[\(q\), \(_\)], \(L\)]\)\!\(\*SubscriptBox[\(\
+\[Gamma]\), \(\[Mu]\)]\)\!\(\*SubscriptBox[\(q\), \(L\)]\) with \
+\!\(\*SubscriptBox[\(c\), \(gl\)]\) = 1\>\""}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+    RowBox[{
+     RowBox[{"ModelDescription", "[", "\"\<cd\>\"", "]"}], "=", 
+     "\"\<Coupling only to right-handed down quarks, L = \!\(\*FractionBox[\(\
+\*SuperscriptBox[\(\[Delta]\), \(\[Mu]\)] a\), \(f\)]\)\!\(\*SubscriptBox[\(\
+\[Sum]\), \(q = d\)]\)\!\(\*SubscriptBox[\(c\), \(qr\)]\) \
+\!\(\*SubscriptBox[OverscriptBox[\(q\), \(_\)], \(R\)]\)\!\(\*SubscriptBox[\(\
+\[Gamma]\), \(\[Mu]\)]\)\!\(\*SubscriptBox[\(q\), \(R\)]\) with \
+\!\(\*SubscriptBox[\(c\), \(dr\)]\) = 1\>\""}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{"(*", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ModelDescription", "[", "\"\<User custom\>\"", "]"}], "=", 
+      RowBox[{"Column", "[", 
+       RowBox[{"{", 
+        RowBox[{
+        "\"\<Choose your own couplings \!\(\*SubscriptBox[\(c\), \(ij\)]\) \
+and \!\(\*SubscriptBox[\(c\), \(gg\)]\), i for generation and j for \
+chirality, L = \!\(\*FractionBox[\(\*SuperscriptBox[\(\[Delta]\), \(\[Mu]\)]a\
+\), \(f\)]\)\[Sum]\!\(\*SubscriptBox[\(c\), \(ij\)]\) \
+\!\(\*SubscriptBox[OverscriptBox[SuperscriptBox[\(q\), \(i\)], \(_\)], \(j\)]\
+\)\!\(\*SubscriptBox[\(\[Gamma]\), \
+\(\[Mu]\)]\)\!\(\*SubscriptBox[SuperscriptBox[\(q\), \(i\)], \(j\)]\)\>\"", 
+         ",", "\"\<input a numerical list for {\!\(\*SubscriptBox[\(c\), \(ul\
+\)]\),\!\(\*SubscriptBox[\(c\), \(ur\)]\),\!\(\*SubscriptBox[\(c\), \
+\(dl\)]\),\!\(\*SubscriptBox[\(c\), \(dr\)]\),\!\(\*SubscriptBox[\(c\), \
+\(sl\)]\),\!\(\*SubscriptBox[\(c\), \(sr\)]\),\!\(\*SubscriptBox[\(c\), \
+\(gg\)]\)} \>\""}], "}"}], "]"}]}], ";"}], "*)"}], "\[IndentingNewLine]", 
+   RowBox[{"ModelListAll", "=", 
+    RowBox[{
+     RowBox[{"Keys", "[", 
+      RowBox[{"DownValues", "@", "couplingPatternOverall"}], "]"}], "[", 
+     RowBox[{"[", 
+      RowBox[{"All", ",", "1", ",", "1"}], "]"}], "]"}]}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Print", "[", "\"\<Coupling pattern :\>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Join", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"Join", "[", 
+        RowBox[{
+         RowBox[{"{", "\"\<Model\>\"", "}"}], ",", "ALPcouplingslist"}], 
+        "]"}], "}"}], ",", 
+      RowBox[{"Join", "[", 
+       RowBox[{
+        RowBox[{"Partition", "[", 
+         RowBox[{"ModelListAll", ",", "1"}], "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"couplingPatternOverall", "[", "model", "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"model", ",", "ModelListAll"}], "}"}]}], "]"}], ",", "2"}],
+        "]"}]}], "]"}], "//", "TableForm"}], "\[IndentingNewLine]", 
+   RowBox[{"Do", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"couplingPattern", "[", 
+       RowBox[{"model", ",", 
+        RowBox[{"ALPcouplingslist", "[", 
+         RowBox[{"[", "i", "]"}], "]"}]}], "]"}], "=", 
+      RowBox[{
+       RowBox[{"couplingPatternOverall", "[", "model", "]"}], "[", 
+       RowBox[{"[", "i", "]"}], "]"}]}], ",", 
+     RowBox[{"{", 
+      RowBox[{"model", ",", "ModelListAll"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1", ",", 
+       RowBox[{"Length", "[", 
+        RowBox[{"couplingPatternOverall", "[", "model", "]"}], "]"}], ",", 
+       "1"}], "}"}]}], "]"}], "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"MASS", "[", "\"\<t\>\"", "]"}], "=", "173."}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"scaleVal", "[", "\"\<EW\>\"", "]"}], ",", 
+       RowBox[{"scaleVal", "[", "\"\<1 TeV\>\"", "]"}], ",", 
+       RowBox[{"scaleVal", "[", "\"\<Neubert\>\"", "]"}]}], "}"}], "=", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"MASS", "[", "\"\<t\>\"", "]"}], ",", 
+       SuperscriptBox["10", "3"], ",", 
+       RowBox[{"4", "*", "Pi", "*", 
+        SuperscriptBox["10", "3"]}]}], "}"}]}], ";"}], "\[IndentingNewLine]", 
+   
+   RowBox[{
+   "Print", "[", 
+    "\"\<List of reference scales \[CapitalLambda] (in TeV):\>\"", "]"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"scaleKeys", "=", 
+     RowBox[{
+      RowBox[{"Keys", "[", 
+       RowBox[{"DownValues", "@", "scaleVal"}], "]"}], "[", 
+      RowBox[{"[", 
+       RowBox[{"All", ",", "1", ",", "1"}], "]"}], "]"}]}], ";"}], 
+   "\[IndentingNewLine]", 
+   RowBox[{"Join", "[", 
+    RowBox[{
+     RowBox[{"{", "scaleKeys", "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"Table", "[", 
+       RowBox[{
+        RowBox[{"scaleVal", "[", "scale", "]"}], ",", 
+        RowBox[{"{", 
+         RowBox[{"scale", ",", "scaleKeys"}], "}"}]}], "]"}], "}"}]}], 
+    "]"}]}]}]], "Input",
+ CellChangeTimes->{{3.903198211144704*^9, 3.9031983492577333`*^9}, {
+   3.9032468896335945`*^9, 3.9032469826767683`*^9}, {3.9032479125614614`*^9, 
+   3.9032481002684493`*^9}, {3.903248247681605*^9, 3.9032482669998465`*^9}, {
+   3.9032486932505627`*^9, 3.9032487166900125`*^9}, {3.9033709196587553`*^9, 
+   3.903370919868904*^9}, {3.9033710786094685`*^9, 3.903371320927178*^9}, {
+   3.9033713966001973`*^9, 3.903371463126905*^9}, {3.903539760163327*^9, 
+   3.903539768443432*^9}, {3.903759886208723*^9, 3.90375988636538*^9}, {
+   3.9053557716271276`*^9, 3.905355817432657*^9}, {3.905355850093027*^9, 
+   3.9053559070250545`*^9}, 3.943671312316472*^9, {3.9453624351953716`*^9, 
+   3.94536258589155*^9}, {3.9453628419045715`*^9, 3.9453628626462097`*^9}, {
+   3.955401646807488*^9, 3.955401992435588*^9}, {3.957578277040658*^9, 
+   3.9575782874437857`*^9}, {3.957578433466363*^9, 3.9575787040961437`*^9}, 
+   3.9575787420669737`*^9, {3.957578781927026*^9, 3.957578814134451*^9}, {
+   3.9575788728795013`*^9, 3.957578893149528*^9}, {3.957579284037086*^9, 
+   3.95757931829347*^9}, 3.957579372483182*^9},
+ CellLabel->"In[2]:=",ExpressionUUID->"f98dda57-fe63-6e43-ae9e-fa5a1f5e247c"],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["\<\"Definition of the couplings: L = \
+\\!\\(\\*FractionBox[SubscriptBox[\\(\[Alpha]\\), \\(s\\)], \\(4  \
+\[Pi]\\)]\\)\\!\\(\\*FractionBox[\\(a\\), \
+\\(f\\)]\\)\\!\\(\\*SubscriptBox[\\(c\\), \\(gg\\)]\\) \
+\\!\\(\\*SuperscriptBox[SubscriptBox[\\(G\\), \\(\[Mu]\[Nu]\\)], \
+\\(a\\)]\\)\\!\\(\\*SuperscriptBox[OverscriptBox[\\(G\\), \\(~\\)], \\(a, \
+\[Mu]\[Nu]\\)]\\)+\\!\\(\\*FractionBox[\\(\\*SuperscriptBox[\\(\[Delta]\\), \
+\\(\[Mu]\\)] a\\), \\(f\\)]\\)\\!\\(\\*SubscriptBox[\\(\[Sum]\\), \\(q\\)]\\)\
+\\!\\(\\*SubscriptBox[\\(c\\), \\(ql\\)]\\) \
+\\!\\(\\*SubscriptBox[OverscriptBox[\\(q\\), \\(_\\)], \
+\\(L\\)]\\)\\!\\(\\*SubscriptBox[\\(\[Gamma]\\), \
+\\(\[Mu]\\)]\\)\\!\\(\\*SubscriptBox[\\(q\\), \
+\\(L\\)]\\)+\\!\\(\\*FractionBox[\\(\\*SuperscriptBox[\\(\[Delta]\\), \
+\\(\[Mu]\\)] a\\), \\(f\\)]\\)\\!\\(\\*SubscriptBox[\\(\[Sum]\\), \\(q\\)]\\)\
+\\!\\(\\*SubscriptBox[\\(c\\), \\(qr\\)]\\) \
+\\!\\(\\*SubscriptBox[OverscriptBox[\\(q\\), \\(_\\)], \
+\\(R\\)]\\)\\!\\(\\*SubscriptBox[\\(\[Gamma]\\), \
+\\(\[Mu]\\)]\\)\\!\\(\\*SubscriptBox[\\(q\\), \\(R\\)]\\)\"\>"], "Print",
+ CellChangeTimes->{
+  3.9453611605994663`*^9, 3.945362573085541*^9, 3.945362646747957*^9, 
+   3.9453628645456276`*^9, 3.9453666865458984`*^9, 3.955402039300643*^9, 
+   3.957574753551037*^9, 3.9575788362290783`*^9, {3.957578874693528*^9, 
+   3.9575788947720547`*^9}, 3.957579452551993*^9, 3.957579532612028*^9, 
+   3.957583118598201*^9, 3.9575915879895773`*^9, 3.9575918057557*^9, {
+   3.95759209568756*^9, 3.957592105271195*^9}},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"151eb687-1173-49f4-ad87-\
+d7fc7bd92176"],
+
+Cell[BoxData["\<\"List of the ALP couplings considered in this \
+notebook:\"\>"], "Print",
+ CellChangeTimes->{
+  3.9453611605994663`*^9, 3.945362573085541*^9, 3.945362646747957*^9, 
+   3.9453628645456276`*^9, 3.9453666865458984`*^9, 3.955402039300643*^9, 
+   3.957574753551037*^9, 3.9575788362290783`*^9, {3.957578874693528*^9, 
+   3.9575788947720547`*^9}, 3.957579452551993*^9, 3.957579532612028*^9, 
+   3.957583118598201*^9, 3.9575915879895773`*^9, 3.9575918057557*^9, {
+   3.95759209568756*^9, 3.957592105274132*^9}},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"611bcc1e-be6d-431c-9588-\
+dcbc56ff2497"]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"cul\"\>", ",", "\<\"cur\"\>", ",", "\<\"cdl\"\>", 
+   ",", "\<\"cdr\"\>", ",", "\<\"csl\"\>", ",", "\<\"csr\"\>", 
+   ",", "\<\"cgg\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.945361160603464*^9, 3.945362573097534*^9, 3.9453626467589664`*^9, 
+   3.945362864551628*^9, 3.945366686554901*^9, 3.9554020393079863`*^9, 
+   3.957574753555334*^9, 3.957578836233869*^9, {3.95757887469786*^9, 
+   3.957578894776306*^9}, 3.957579452556549*^9, 3.957579532616961*^9, 
+   3.957583118602859*^9, 3.957591587995376*^9, 3.957591805760491*^9, {
+   3.957592095693841*^9, 3.957592105276663*^9}},
+ CellLabel->"Out[56]=",ExpressionUUID->"9e3ff384-9ec6-489d-854e-23e18dbc17dc"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"cd\"\>", ",", "\<\"cQ\"\>", ",", "\<\"Gluon\"\>"}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.945361160603464*^9, 3.945362573097534*^9, 3.9453626467589664`*^9, 
+   3.945362864551628*^9, 3.945366686554901*^9, 3.9554020393079863`*^9, 
+   3.957574753555334*^9, 3.957578836233869*^9, {3.95757887469786*^9, 
+   3.957578894776306*^9}, 3.957579452556549*^9, 3.957579532616961*^9, 
+   3.957583118602859*^9, 3.957591587995376*^9, 3.957591805760491*^9, {
+   3.957592095693841*^9, 3.957592105278791*^9}},
+ CellLabel->"Out[64]=",ExpressionUUID->"6aefd716-7239-4b0e-a64c-a857cc4d506a"],
+
+Cell[BoxData["\<\"Coupling pattern :\"\>"], "Print",
+ CellChangeTimes->{
+  3.9453611605994663`*^9, 3.945362573085541*^9, 3.945362646747957*^9, 
+   3.9453628645456276`*^9, 3.9453666865458984`*^9, 3.955402039300643*^9, 
+   3.957574753551037*^9, 3.9575788362290783`*^9, {3.957578874693528*^9, 
+   3.9575788947720547`*^9}, 3.957579452551993*^9, 3.957579532612028*^9, 
+   3.957583118598201*^9, 3.9575915879895773`*^9, 3.9575918057557*^9, {
+   3.95759209568756*^9, 3.957592105280333*^9}},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"d428a5af-bfa3-46b4-a491-\
+641c0614e24f"],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Model\"\>", "\<\"cul\"\>", "\<\"cur\"\>", "\<\"cdl\"\>", "\<\"cdr\"\
+\>", "\<\"csl\"\>", "\<\"csr\"\>", "\<\"cgg\"\>"},
+    {"\<\"cd\"\>", "0", "0", "0", "1", "0", "0", "0"},
+    {"\<\"cQ\"\>", "1", "0", "1", "0", "1", "0", "1"},
+    {"\<\"Gluon\"\>", "0", "0", "0", "0", "0", "0", "1"}
+   },
+   GridBoxAlignment->{"Columns" -> {{Left}}, "Rows" -> {{Baseline}}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Output",
+ CellChangeTimes->{
+  3.945361160603464*^9, 3.945362573097534*^9, 3.9453626467589664`*^9, 
+   3.945362864551628*^9, 3.945366686554901*^9, 3.9554020393079863`*^9, 
+   3.957574753555334*^9, 3.957578836233869*^9, {3.95757887469786*^9, 
+   3.957578894776306*^9}, 3.957579452556549*^9, 3.957579532616961*^9, 
+   3.957583118602859*^9, 3.957591587995376*^9, 3.957591805760491*^9, {
+   3.957592095693841*^9, 3.957592105281948*^9}},
+ CellLabel->
+  "Out[66]//TableForm=",ExpressionUUID->"7250e8be-9822-4aad-81d8-\
+630220fc58c8"],
+
+Cell[BoxData["\<\"List of reference scales \[CapitalLambda] (in TeV):\"\>"], \
+"Print",
+ CellChangeTimes->{
+  3.9453611605994663`*^9, 3.945362573085541*^9, 3.945362646747957*^9, 
+   3.9453628645456276`*^9, 3.9453666865458984`*^9, 3.955402039300643*^9, 
+   3.957574753551037*^9, 3.9575788362290783`*^9, {3.957578874693528*^9, 
+   3.9575788947720547`*^9}, 3.957579452551993*^9, 3.957579532612028*^9, 
+   3.957583118598201*^9, 3.9575915879895773`*^9, 3.9575918057557*^9, {
+   3.95759209568756*^9, 3.957592105283642*^9}},
+ CellLabel->
+  "\:6b63\:5728\:8ba1\:7b97In[54]:=",ExpressionUUID->"fc412ce8-d718-4ac0-9bf7-\
+d5f0409a769b"],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"1 TeV\"\>", ",", "\<\"EW\"\>", ",", "\<\"Neubert\"\>"}], 
+    "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"1000", ",", "173.`", ",", 
+     RowBox[{"4000", " ", "\[Pi]"}]}], "}"}]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.945361160603464*^9, 3.945362573097534*^9, 3.9453626467589664`*^9, 
+   3.945362864551628*^9, 3.945366686554901*^9, 3.9554020393079863`*^9, 
+   3.957574753555334*^9, 3.957578836233869*^9, {3.95757887469786*^9, 
+   3.957578894776306*^9}, 3.957579452556549*^9, 3.957579532616961*^9, 
+   3.957583118602859*^9, 3.957591587995376*^9, 3.957591805760491*^9, {
+   3.957592095693841*^9, 3.9575921052853193`*^9}},
+ CellLabel->"Out[72]=",ExpressionUUID->"99b6f7a9-c7cf-450a-ac07-3d2209c018e1"]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Code selecting the model", "Section",
+ CellChangeTimes->{{3.945362654974436*^9, 3.945362657956129*^9}, 
+   3.9453639773466015`*^9},ExpressionUUID->"e7e6ed18-68c4-5d46-a2b6-\
+be1701ee590e"],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"validateInput", "[", "input_", "]"}], ":=", 
+   RowBox[{"If", "[", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"VectorQ", "[", 
+       RowBox[{"input", ",", "NumericQ"}], "]"}], "&&", 
+      RowBox[{
+       RowBox[{"Length", "[", "input", "]"}], "==", "7"}]}], ",", "True", 
+     ",", "\"\<Please input numerical list with 7 elements\>\""}], "]"}]}], 
+  ";"}]], "Input",
+ CellChangeTimes->{{3.957580709492567*^9, 3.957580752842133*^9}, 
+   3.957580875947588*^9, {3.9575811305454197`*^9, 3.957581165162785*^9}, {
+   3.957581209367585*^9, 3.957581210610168*^9}, {3.9575812872074327`*^9, 
+   3.957581287781008*^9}},
+ CellLabel->"In[21]:=",ExpressionUUID->"b584d55c-4178-4b3d-a4c6-6f9e695a6cab"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"selectionDialogExplanationOneOption", "[", 
+    RowBox[{"list_", ",", "descriptions_", ",", "phrase_", ",", 
+     RowBox[{"width_", ":", "200"}]}], "]"}], ":=", 
+   RowBox[{"DialogInput", "[", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"choice", "=", "Null"}], ",", 
+        RowBox[{"inputlist", "=", "Null"}], ",", 
+        RowBox[{"optsAssoc", "=", 
+         RowBox[{"AssociationThread", "[", 
+          RowBox[{"list", "->", "descriptions"}], "]"}]}]}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Create", " ", "an", " ", "association", " ", "for", " ", "easy", " ", 
+        "lookup", " ", "of", " ", 
+        RowBox[{"descriptions", "."}]}], "*)"}], 
+      RowBox[{"Column", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"Style", "[", 
+           RowBox[{"phrase", ",", "Bold", ",", "16"}], "]"}], ",", 
+          RowBox[{"Grid", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Pane", "[", 
+                RowBox[{
+                 RowBox[{"RadioButtonBar", "[", 
+                  RowBox[{
+                   RowBox[{"Dynamic", "[", "choice", "]"}], ",", "list", ",", 
+                   
+                   RowBox[{"Appearance", "->", "\"\<Vertical\>\""}]}], "]"}], 
+                 ",", 
+                 RowBox[{"ImageSize", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"width", ",", "100"}], "}"}]}], ",", 
+                 RowBox[{"Scrollbars", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"False", ",", "False"}], "}"}]}], ",", 
+                 RowBox[{"Frame", "->", "True"}]}], "]"}], ",", 
+               RowBox[{"Pane", "[", 
+                RowBox[{
+                 RowBox[{"Dynamic", "[", 
+                  RowBox[{"If", "[", 
+                   RowBox[{
+                    RowBox[{"choice", "===", "Null"}], ",", 
+                    "\"\<Please select an option to see its description.\>\"",
+                     ",", 
+                    RowBox[{"optsAssoc", "[", "choice", "]"}]}], "]"}], "]"}],
+                  ",", 
+                 RowBox[{"ImageSize", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"150", ",", "100"}], "}"}]}], ",", 
+                 RowBox[{"Scrollbars", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"True", ",", "False"}], "}"}]}], ",", 
+                 RowBox[{"Frame", "->", "True"}], ",", 
+                 RowBox[{"Background", "->", "LightYellow"}], ",", 
+                 RowBox[{"Alignment", "->", "Left"}]}], "]"}]}], "}"}], "}"}],
+             ",", 
+            RowBox[{"Spacings", "->", 
+             RowBox[{"{", 
+              RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          "\"\<Or choose your own couplings {\!\(\*SubscriptBox[\(c\), \
+\(ul\)]\),\!\(\*SubscriptBox[\(c\), \(ur\)]\),\!\(\*SubscriptBox[\(c\), \
+\(dl\)]\),\!\(\*SubscriptBox[\(c\), \(dr\)]\),\!\(\*SubscriptBox[\(c\), \
+\(sl\)]\),\!\(\*SubscriptBox[\(c\), \(sr\)]\),\!\(\*SubscriptBox[\(c\), \
+\(gg\)]\)},\>\"", ",", 
+          "\"\< i for generation and j for chirality, L = \
+\!\(\*FractionBox[\(\*SuperscriptBox[\(\[Delta]\), \(\[Mu]\)] a\), \(f\)]\)\
+\[Sum]\!\(\*SubscriptBox[\(c\), \(ij\)]\) \
+\!\(\*SubscriptBox[OverscriptBox[SuperscriptBox[\(q\), \(i\)], \(_\)], \(j\)]\
+\)\!\(\*SubscriptBox[\(\[Gamma]\), \
+\(\[Mu]\)]\)\!\(\*SubscriptBox[SuperscriptBox[\(q\), \(i\)], \(j\)]\)\>\"", 
+          ",", "\[IndentingNewLine]", 
+          RowBox[{"InputField", "[", 
+           RowBox[{
+            RowBox[{"Dynamic", "[", "inputlist", "]"}], ",", 
+            RowBox[{
+            "FieldHint", "->", 
+             "\"\<input a numerical list as {\!\(\*SubscriptBox[\(c\), \
+\(ul\)]\),\!\(\*SubscriptBox[\(c\), \(ur\)]\),\!\(\*SubscriptBox[\(c\), \
+\(dl\)]\),\!\(\*SubscriptBox[\(c\), \(dr\)]\),\!\(\*SubscriptBox[\(c\), \
+\(sl\)]\),\!\(\*SubscriptBox[\(c\), \(sr\)]\),\!\(\*SubscriptBox[\(c\), \
+\(gg\)]\)} \>\""}]}], "]"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Dynamic", "[", 
+           RowBox[{"If", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"inputlist", "=!=", "Null"}], "&&", 
+              RowBox[{
+               RowBox[{"validateInput", "[", "inputlist", "]"}], "=!=", 
+               "True"}]}], ",", 
+             RowBox[{"Style", "[", 
+              RowBox[{
+               RowBox[{"validateInput", "[", "inputlist", "]"}], ",", "Red", 
+               ",", "12"}], "]"}], ",", "\"\<\>\""}], "]"}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"Row", "[", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"Button", "[", 
+              RowBox[{"\"\<OK\>\"", ",", 
+               RowBox[{"DialogReturn", "[", 
+                RowBox[{"If", "[", 
+                 RowBox[{
+                  RowBox[{"choice", "=!=", "Null"}], ",", "choice", ",", 
+                  "inputlist"}], "]"}], "]"}], ",", 
+               RowBox[{"Enabled", "->", 
+                RowBox[{"Dynamic", "[", 
+                 RowBox[{
+                  RowBox[{"choice", "=!=", "Null"}], "||", 
+                  RowBox[{"inputlist", "=!=", "Null"}]}], "]"}]}], ",", 
+               RowBox[{"ImageSize", "->", 
+                RowBox[{"{", 
+                 RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}], ",", 
+             RowBox[{"Spacer", "[", "20", "]"}], ",", 
+             RowBox[{"Button", "[", 
+              RowBox[{"\"\<Cancel\>\"", ",", 
+               RowBox[{"DialogReturn", "[", "None", "]"}], ",", 
+               RowBox[{"ImageSize", "->", 
+                RowBox[{"{", 
+                 RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}]}], "}"}], "]"}], 
+          ",", 
+          RowBox[{"Spacer", "[", "5", "]"}]}], "}"}], ",", 
+        RowBox[{"Alignment", "->", "Center"}], ",", 
+        RowBox[{"Spacings", "->", "2"}]}], "]"}]}], "]"}], "]"}]}], 
+  ";"}], "\n", 
+ RowBox[{"ModelSelector", ":=", 
+  RowBox[{"selectionDialogExplanationOneOption", "[", 
+   RowBox[{"ModelListAll", ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ModelDescription", "[", "#", "]"}], "&"}], "/@", 
+     "ModelListAll"}], ",", "\"\<Select the model\>\"", ",", "100"}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.945362759206318*^9, 3.9453627592083187`*^9}, {
+   3.9453629035997257`*^9, 3.9453629142470875`*^9}, {3.945362944715542*^9, 
+   3.9453629481251144`*^9}, 3.9453629898733253`*^9, {3.95540206408506*^9, 
+   3.9554020666865*^9}, {3.955402106974142*^9, 3.95540212452351*^9}, {
+   3.957579211561428*^9, 3.9575792524603148`*^9}, {3.957579322230878*^9, 
+   3.9575793556997643`*^9}, {3.9575793860809193`*^9, 3.957579427295751*^9}, {
+   3.957579472741399*^9, 3.957579482056056*^9}, {3.95757955436895*^9, 
+   3.957579559677127*^9}, {3.95757960349544*^9, 3.957579629466795*^9}, {
+   3.957579665846221*^9, 3.9575797037812033`*^9}, {3.9575801373916903`*^9, 
+   3.957580178850889*^9}, 3.9575802200486183`*^9, {3.957580252026184*^9, 
+   3.957580330501173*^9}, {3.957580776648291*^9, 3.9575808335826597`*^9}, {
+   3.957580914555196*^9, 3.957580921823065*^9}, {3.957581026230475*^9, 
+   3.95758108742749*^9}, {3.957581240270672*^9, 3.957581244762094*^9}, {
+   3.9575812979042473`*^9, 3.957581304762229*^9}, {3.957581450095544*^9, 
+   3.957581453203086*^9}, {3.957581552405581*^9, 3.957581562173538*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"0fadc6f3-9e18-6445-af68-6fd5e39ef0d1"],
+
+Cell[BoxData["\[IndentingNewLine]"], "Input",
+ CellChangeTimes->{3.9575918004290533`*^9},
+ CellLabel->"In[24]:=",ExpressionUUID->"d7c89051-a404-42d8-a174-ccaaa6ad1703"],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"selectionDialogExplanationOneOption1", "[", 
+    RowBox[{"list_", ",", "descriptions_", ",", "phrase_", ",", 
+     RowBox[{"width_", ":", "200"}]}], "]"}], ":=", 
+   RowBox[{"DialogInput", "[", 
+    RowBox[{"Module", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"choice", "=", "Null"}], "}"}], ",", 
+      RowBox[{"(*", 
+       RowBox[{
+       "Create", " ", "an", " ", "association", " ", "for", " ", "easy", " ", 
+        "lookup", " ", "of", " ", 
+        RowBox[{"descriptions", "."}]}], "*)"}], 
+      RowBox[{"Module", "[", 
+       RowBox[{
+        RowBox[{"{", 
+         RowBox[{"optsAssoc", "=", 
+          RowBox[{"AssociationThread", "[", 
+           RowBox[{"list", "->", "descriptions"}], "]"}]}], "}"}], ",", 
+        RowBox[{"Column", "[", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{
+            RowBox[{"Style", "[", 
+             RowBox[{"phrase", ",", "Bold", ",", "16"}], "]"}], ",", 
+            RowBox[{"Grid", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"Pane", "[", 
+                  RowBox[{
+                   RowBox[{"RadioButtonBar", "[", 
+                    RowBox[{
+                    RowBox[{"Dynamic", "[", "choice", "]"}], ",", "list", ",", 
+                    RowBox[{"Appearance", "->", "\"\<Vertical\>\""}]}], "]"}],
+                    ",", 
+                   RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"width", ",", "100"}], "}"}]}], ",", 
+                   RowBox[{"Scrollbars", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"False", ",", "False"}], "}"}]}], ",", 
+                   RowBox[{"Frame", "->", "True"}]}], "]"}], ",", 
+                 RowBox[{"Pane", "[", 
+                  RowBox[{
+                   RowBox[{"Dynamic", "[", 
+                    RowBox[{"If", "[", 
+                    RowBox[{
+                    RowBox[{"choice", "===", "Null"}], ",", 
+                    "\"\<Please select an option to see its description.\>\"",
+                     ",", 
+                    RowBox[{"optsAssoc", "[", "choice", "]"}]}], "]"}], "]"}],
+                    ",", 
+                   RowBox[{"ImageSize", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"150", ",", "100"}], "}"}]}], ",", 
+                   RowBox[{"Scrollbars", "->", 
+                    RowBox[{"{", 
+                    RowBox[{"True", ",", "False"}], "}"}]}], ",", 
+                   RowBox[{"Frame", "->", "True"}], ",", 
+                   RowBox[{"Background", "->", "LightYellow"}], ",", 
+                   RowBox[{"Alignment", "->", "Left"}]}], "]"}]}], "}"}], 
+               "}"}], ",", 
+              RowBox[{"Spacings", "->", 
+               RowBox[{"{", 
+                RowBox[{"2", ",", "2"}], "}"}]}]}], "]"}], ",", 
+            RowBox[{"Row", "[", 
+             RowBox[{"{", 
+              RowBox[{
+               RowBox[{"Button", "[", 
+                RowBox[{"\"\<OK\>\"", ",", 
+                 RowBox[{"DialogReturn", "[", "choice", "]"}], ",", 
+                 RowBox[{"Enabled", "->", 
+                  RowBox[{"Dynamic", "[", 
+                   RowBox[{"choice", "=!=", "Null"}], "]"}]}], ",", 
+                 RowBox[{"ImageSize", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}], ",", 
+               RowBox[{"Spacer", "[", "20", "]"}], ",", 
+               RowBox[{"Button", "[", 
+                RowBox[{"\"\<Cancel\>\"", ",", 
+                 RowBox[{"DialogReturn", "[", "None", "]"}], ",", 
+                 RowBox[{"ImageSize", "->", 
+                  RowBox[{"{", 
+                   RowBox[{"80", ",", "30"}], "}"}]}]}], "]"}]}], "}"}], 
+             "]"}], ",", 
+            RowBox[{"Spacer", "[", "5", "]"}]}], "}"}], ",", 
+          RowBox[{"Alignment", "->", "Center"}], ",", 
+          RowBox[{"Spacings", "->", "2"}]}], "]"}]}], "]"}]}], "]"}], "]"}]}],
+   ";"}], "\n", 
+ RowBox[{"ModelSelector1", ":=", 
+  RowBox[{"selectionDialogExplanationOneOption1", "[", 
+   RowBox[{"ModelListAll", ",", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ModelDescription", "[", "#", "]"}], "&"}], "/@", 
+     "ModelListAll"}], ",", "\"\<Select the model\>\"", ",", "100"}], 
+   "]"}]}]}], "Input",
+ CellChangeTimes->{{3.957609753086734*^9, 
+  3.9576097618040743`*^9}},ExpressionUUID->"0d2cbf9a-34a4-4d92-ba9a-\
+faccef8a0474"]
+}, Open  ]]
+}, Open  ]]
+},
+Evaluator->"new_kernal2",
+WindowSize->{1152, 686},
+WindowMargins->{{Automatic, 4}, {81, Automatic}},
+FrontEndVersion->"13.1 for Mac OS X ARM (64-bit) \
+(2022\:5e746\:670816\:65e5)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"8f382cff-18c1-ef42-a838-4f0ac9fd855d"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 245, 4, 86, "Chapter",ExpressionUUID->"dc497e5d-f6a7-8742-a3c0-1f47933c0dc0"],
+Cell[824, 28, 172, 2, 37, "Input",ExpressionUUID->"16bdf545-0d5a-4989-b965-bfcadcbe2862"],
+Cell[CellGroupData[{
+Cell[1021, 34, 11540, 266, 1345, "Input",ExpressionUUID->"f98dda57-fe63-6e43-ae9e-fa5a1f5e247c"],
+Cell[CellGroupData[{
+Cell[12586, 304, 1640, 27, 48, "Print",ExpressionUUID->"151eb687-1173-49f4-ad87-d7fc7bd92176"],
+Cell[14229, 333, 628, 11, 29, "Print",ExpressionUUID->"611bcc1e-be6d-431c-9588-dcbc56ff2497"]
+}, Open  ]],
+Cell[14872, 347, 704, 12, 42, "Output",ExpressionUUID->"9e3ff384-9ec6-489d-854e-23e18dbc17dc"],
+Cell[15579, 361, 619, 11, 42, "Output",ExpressionUUID->"6aefd716-7239-4b0e-a64c-a857cc4d506a"],
+Cell[16201, 374, 590, 10, 29, "Print",ExpressionUUID->"d428a5af-bfa3-46b4-a491-641c0614e24f"],
+Cell[16794, 386, 1218, 27, 125, "Output",ExpressionUUID->"7250e8be-9822-4aad-81d8-630220fc58c8"],
+Cell[18015, 415, 625, 11, 29, "Print",ExpressionUUID->"fc412ce8-d718-4ac0-9bf7-d5f0409a769b"],
+Cell[18643, 428, 776, 16, 42, "Output",ExpressionUUID->"99b6f7a9-c7cf-450a-ac07-3d2209c018e1"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[19456, 449, 194, 3, 84, "Section",ExpressionUUID->"e7e6ed18-68c4-5d46-a2b6-be1701ee590e"],
+Cell[19653, 454, 736, 17, 83, "Input",ExpressionUUID->"b584d55c-4178-4b3d-a4c6-6f9e695a6cab"],
+Cell[20392, 473, 7517, 159, 907, "Input",ExpressionUUID->"0fadc6f3-9e18-6445-af68-6fd5e39ef0d1"],
+Cell[27912, 634, 168, 2, 64, "Input",ExpressionUUID->"d7c89051-a404-42d8-a174-ccaaa6ad1703"],
+Cell[28083, 638, 4498, 104, 585, "Input",ExpressionUUID->"0d2cbf9a-34a4-4d92-ba9a-faccef8a0474"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
